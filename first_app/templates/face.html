@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}一锅米饭{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+{% include 'nav.html' %}
+<form method="post">
+    <img class="img-thumbnail" src="" width="240px" height="320px">
+    <input type="file" id="image" id="file_a" accept="image/*">
+{#    <input type="submit" value="提交">#}
+</form>
+<p id="text">h</p>
+</body>
+<script>
+    {#        document.getElementById('text').innerHTML="hello,world";#}
+</script>
+</html>

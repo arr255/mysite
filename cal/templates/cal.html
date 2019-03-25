@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="Access-Control-Allow-Origin" content="*" />
+		<!-- 新 Bootstrap 核心 CSS 文件 -->
+		<link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+		<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+		<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+
+		<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+		<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+	<h1 style="text-align:center">Integrate</h1>
+        <form class="bs-example bs-example-form">
+			公式:<input name="formula" class="form-control"><br>
+            变量:<input name="variable" class="form-control"><br>
+            下限:<input name="downNumber" class="form-control"><br>
+            上限:<input name="upNumber" class="form-control"><br>
+        </form>
+		<button onclick="query()" class="btn btn-default">提交</button><br>
+        精确结果<input id="result" class="form-control">
+		小数结果<input id="result2" class="form-control">
+    <p id="test"></p>
+	</body>
+		<script>
+        function query() {
+            formula=$("input[name='formula']").val();
+            variable=$("input[name='variable']").val();
+            downNumber=$("input[name='downNumber']").val();
+            upNumber=$("input[name='upNumber']").val();
+            t=0;
+            $.ajax({
+                url:"/calPage/cal",
+                method:"get",
+                data:{"formula":formula,"variable":variable,"downNumber":downNumber,"upNumber":upNumber},
+                async:true,
+                dataType:"json",
+                success:function(data){
+                	console.log(data);
+                	t=data;
+                    $("#result").val(data.result);
+                    $("#result2").val(data.result2);
+                },
+                error:function(){
+                    alert("fail");
+                }
+            })
+        }
+		</script>
+</html>
