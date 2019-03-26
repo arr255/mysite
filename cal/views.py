@@ -29,11 +29,11 @@ def cal(request):
             result2=result.evalf()
     data={"result":str(result),"result2":str(result2)}
     return HttpResponse(json.dumps(data))
-
 def myDiff(request):
     expr=request.GET.get('expr')
     variable=request.GET.get('variable')
     number=request.GET.get('number')
     x=symbols("x")
     result=diff(expr,variable).subs(variable,float(number))
-    return HttpResponse(result)
+    data={"result":str(result)}
+    return HttpResponse(json.dumps(data))
