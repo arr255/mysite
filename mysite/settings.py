@@ -25,7 +25,7 @@ SECRET_KEY = 'w@61j#kld!dj90*1#0)mbikgd#z6$^!uq#^nus4l*vos7%(ngb'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["www.guomf.top"]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
