@@ -28,12 +28,21 @@ def cal(request):
         else:
             result2=result.evalf()
     data={"result":str(result),"result2":str(result2)}
-    return HttpResponse(json.dumps(data))
+    response=HttpResponse(json.dumps(data))
+    response["Access-Control-Allow-Origin"] = "*"
+    response["Access-Control-Allow-Methods"] = "POST, GET, OPTIONS"
+    response["Access-Control-Max-Age"] = "1000"
+    response["Access-Control-Allow-Headers"] = "*"
+    return response
 def myDiff(request):
     expr=request.GET.get('expr')
     variable=request.GET.get('variable')
     number=request.GET.get('number')
     x=symbols("x")
     result=diff(expr,variable).subs(variable,float(number))
-    data={"result":str(result)}
-    return HttpResponse(json.dumps(data))
+    response = HttpResponse(json.dumps({"result":str(result)}))
+    response["Access-Control-Allow-Origin"] = "*"
+    response["Access-Control-Allow-Methods"] = "POST, GET, OPTIONS"
+    response["Access-Control-Max-Age"] = "1000"
+    response["Access-Control-Allow-Headers"] = "*"
+    return response
