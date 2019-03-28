@@ -26,6 +26,8 @@ urlpatterns = [
     url(r'^face.html',first_app_views.face_recognition),
     url(r'^cal$',cal_views.inte),
     url(r'^calPage/$',cal_views.calHtml),
-    url(r'^calPage/cal$',cal_views.cal),
+    url(r'^calPage/myInt$',cal_views.myInt),
     url(r'^calPage/myDiff',cal_views.myDiff),
+    url(r'^calPage/mySum',cal_views.mySum),
+    url(r'^calPage/myProd', cal_views.myProd),
 ]

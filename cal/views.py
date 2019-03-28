@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from sympy import *
 from django.http import HttpResponse
+from sympy.abc import x,y,z
 import json
 # Create your views here.
 def inte(request):
@@ -13,7 +14,7 @@ def inte(request):
 def calHtml(request):
     return render(request,'cal.html')
 
-def cal(request):
+def myInt(request):
     formula = request.GET.get('formula')
     variable=request.GET.get('variable')
     downNumber=request.GET.get('downNumber')
@@ -27,8 +28,8 @@ def cal(request):
             result2=eval(str(result))
         else:
             result2=result.evalf()
-    data={"result":str(result),"result2":str(result2)}
-    response=HttpResponse(json.dumps(data))
+    data={"result": str(result), "result2": str(result2)}
+    response = HttpResponse(json.dumps(data))
     response["Access-Control-Allow-Origin"] = "*"
     response["Access-Control-Allow-Methods"] = "POST, GET, OPTIONS"
     response["Access-Control-Max-Age"] = "1000"
@@ -41,6 +42,42 @@ def myDiff(request):
     x=symbols("x")
     result=diff(expr,variable).subs(variable,float(number))
     response = HttpResponse(json.dumps({"result":str(result)}))
+    response["Access-Control-Allow-Origin"] = "*"
+    response["Access-Control-Allow-Methods"] = "POST, GET, OPTIONS"
+    response["Access-Control-Max-Age"] = "1000"
+    response["Access-Control-Allow-Headers"] = "*"
+    return response
+
+
+def mySum(request):
+    formula = request.GET.get('formula')
+    downNumber = request.GET.get('downNumber')
+    upNumber = request.GET.get('upNumber')
+    result = Sum(formula, ('x', downNumber, upNumber)).doit()
+    if (isinstance(result, float)):
+        result = eval(str(result))
+    else:
+        result = result.evalf()
+    data = {"result": str(result)}
+    response = HttpResponse(json.dumps(data))
+    response["Access-Control-Allow-Origin"] = "*"
+    response["Access-Control-Allow-Methods"] = "POST, GET, OPTIONS"
+    response["Access-Control-Max-Age"] = "1000"
+    response["Access-Control-Allow-Headers"] = "*"
+    return response
+
+
+def myProd(request):
+    formula = request.GET.get('formula')
+    downNumber = request.GET.get('downNumber')
+    upNumber = request.GET.get('upNumber')
+    result = Product(formula, ('x', downNumber, upNumber)).doit()
+    if (isinstance(result, float)):
+        result = eval(str(result))
+    else:
+        result = result.evalf()
+    data = {"result": str(result)}
+    response = HttpResponse(json.dumps(data))
     response["Access-Control-Allow-Origin"] = "*"
     response["Access-Control-Allow-Methods"] = "POST, GET, OPTIONS"
     response["Access-Control-Max-Age"] = "1000"
